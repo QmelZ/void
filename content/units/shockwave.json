@@ -7,5 +7,7 @@
     "accel": 1,
     "canBoost": true,
     "payloadCapacity": 0,
+    "visualElevation": 1,
     "canDrown": false,
+    "research": "mono",
 }

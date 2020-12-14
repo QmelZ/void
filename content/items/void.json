@@ -1,0 +1,10 @@
+{
+    "name": "Void",
+    "description": "???",
+    "color": "8f00ff",
+    "explosiveness": 1,
+    "flammability": 1,
+    "radioactivity": 1,
+    "hardness": 9,
+    "cost": 2,
+}
