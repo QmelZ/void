@@ -20,6 +20,7 @@ Events.on(ClientLoadEvent, () => {
 
 // require stuff
 require("units/shockwave");
+require("blocks/voidron-collider");
 
 /*
     Vars.ui.showText(
