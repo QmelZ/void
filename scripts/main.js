@@ -16,10 +16,12 @@ Core.net.httpGet(versionUrl, (response) => {
 });
 Events.on(ClientLoadEvent, () => {
     Vars.ui.loadfrag.show();
-    
 });
 */
 
 // require stuff
 require("units/shockwave");
 require("blocks/voidron-collider");
+
+// Warning
+Vars.ui.showText("", "[#8f00ff]Void[] is unfinished and might do some weird stuff to your game\n\n[scarlet]Use at your own risk[]")
