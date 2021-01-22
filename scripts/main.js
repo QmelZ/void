@@ -7,21 +7,15 @@ if(!Vars.headless){
     });
 };
 
-/*
-var versionUrl = "h";
-Core.net.httpGet(versionUrl, (response) => {
-    var version = response.getResultAsString();
-}, (error) => {
-    var version = "[scarlet]Error getting the version info[]";
-});
-Events.on(ClientLoadEvent, () => {
-    Vars.ui.loadfrag.show();
-});
-*/
+global.void = {
+    content: {}
+};
 
 // require stuff
-require("units/shockwave");
-require("blocks/voidron-collider");
+let content = [
+    "materials", "blocks", /* "units", "planets" */
+];
+for(let c of content) require("content/" + c);
 
-// Warning
-Vars.ui.showText("", "[#8f00ff]Void[] is unfinished and might do some weird stuff to your game\n\n[scarlet]Use at your own risk[]")
+// Warning TODO: replace this because its spammy just like hackustry v3
+// Vars.ui.showText("", "[#8f00ff]Void[] is unfinished and might do some weird stuff to your game\n\n[scarlet]Use at your own risk[]");
