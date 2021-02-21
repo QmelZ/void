@@ -1,21 +1,31 @@
 // The start of void (aka obligatory first line comment)
 Vars.enableConsole = true;
 
-if(!Vars.headless){
-    Core.app.post(() => {
-        Vars.mods.locateMod("void").meta.displayName = "[#8f00ff]Void[]"
-    });
-};
+Events.on(ClientLoadEvent, () => {
+    if(!Vars.headless){
+        Core.app.post(() => {
+            Vars.mods.locateMod("void").meta.displayName = "[#8f00ff]Void[]"
+        });
+    }
+});
 
-global.void = {
-    content: {}
-};
+// script loader
+function load(content){
+    for(let i in content){
+        content[i].each(e => {
+            require("content/" + i.toString() + "/" + e);
+        });
+    }
+}
 
-// require stuff
-let content = [
-    "materials", "blocks", /* "units", "planets" */
-];
-for(let c of content) require("content/" + c);
+let content = {
+    blocks: Seq.with(
+        "voidpad", /* "aqua-shield" */
+    ),
+    misc: Seq.with(
+        /* "selenia" */
+    )
+}
 
-// Warning TODO: replace this because its spammy just like hackustry v3
-// Vars.ui.showText("", "[#8f00ff]Void[] is unfinished and might do some weird stuff to your game\n\n[scarlet]Use at your own risk[]");
+// this line is not important at all
+load(content);
