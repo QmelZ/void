@@ -23,7 +23,7 @@ let content = {
         "voidpad", /* "aqua-shield" */
     ),
     misc: Seq.with(
-        "selenia"
+        /* "selenia" */
     )
 }
 
