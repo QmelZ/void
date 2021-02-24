@@ -12,19 +12,19 @@ Events.on(ClientLoadEvent, () => {
 // script loader
 function load(content){
     for(let i in content){
-        content[i].each(e => {
+        content[i].forEach(e => {
             require("content/" + i.toString() + "/" + e);
         });
     }
 }
 
 let content = {
-    blocks: Seq.with(
+    blocks: [
         "voidpad", /* "aqua-shield" */
-    ),
-    misc: Seq.with(
+    ],
+    misc: [
         /* "selenia" */
-    )
+    ]
 }
 
 // this line is not important at all

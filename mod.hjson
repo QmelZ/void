@@ -4,5 +4,5 @@
     author: "QmelZ",
     description: "A mod which i will put my random ideas over time. Do not expect this mod to be balanced OR good, this is my first normal mod.",
     version: 0.2,
-    minGameVersion: 121,
+    minGameVersion: 125
 }

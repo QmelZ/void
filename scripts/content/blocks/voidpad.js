@@ -8,17 +8,19 @@ voidpad = extend(StorageBlock, "void-pad", {
     update: true,
     size: 2,
     itemCapacity: 1,
-    configurable: true
+    hasPower: true,
+    consumesPower: true,
+    configrations: ObjectMap.of()
 });
+voidpad.consumes.power(240 / 60);
 
 voidpad.buildType = () => extend(StorageBlock.StorageBuild, voidpad, {
     
     // configuration
-    sender: true,
-    shouldShowConfigure: () => true,
-    shouldHideConfigure: () => true,
-    buildConfiguration(){
-        this.sender = !this.sender;
+    isSender: true,
+    tapped(){
+        print(this.isSender);
+        this.isSender = !this.isSender;
     },
     
     // function
@@ -50,8 +52,8 @@ voidpad.buildType = () => extend(StorageBlock.StorageBuild, voidpad, {
     updateTile(){
         this.super$updateTile();
         
-        if(this.enabled){
-            if(this.sender){
+        if(this.enabled && this.power.status === 1){
+            if(this.isSender){
                 this.send();
             }else{
                 this.receive();
@@ -67,7 +69,7 @@ voidpad.buildType = () => extend(StorageBlock.StorageBuild, voidpad, {
             Draw.color(this.team.color)
             Draw.alpha(((0.5 - Math.abs((Time.time / 100 % 1) - 0.5)) * 2));
             Draw.rect(
-                this.sender ? Icon.upOpen.getRegion() : Icon.downOpen.getRegion(),
+                this.isSender ? Icon.upOpen.getRegion() : Icon.downOpen.getRegion(),
                 this.x, this.y
             );
         }
@@ -83,6 +85,5 @@ voidpad.buildType = () => extend(StorageBlock.StorageBuild, voidpad, {
             this.x - 2, this.y + 2
         );
     },
-    drawTeam(){},
-    drawConfigure(){}
+    drawTeam(){}
 });
