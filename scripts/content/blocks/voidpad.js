@@ -1,6 +1,4 @@
-let voidpad;
-
-voidpad = extend(StorageBlock, "void-pad", {
+let voidpad = extend(StorageBlock, "void-pad", {
     localizedName: "Void Pad",
     description: "Can send/receive items to/from the core",
     buildVisibility: BuildVisibility.shown,

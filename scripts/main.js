@@ -1,9 +1,5 @@
 let load = require("loader");
-let content = JSON.parse(
-    readString(
-        this.modName + "/scripts/content.json"
-    )
-);
+let content = require("content");
 load(content);
 
 Events.on(ClientLoadEvent, () => {
