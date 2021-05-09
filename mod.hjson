@@ -2,7 +2,7 @@
     name: "void",
     displayName: "Void",
     author: "QmelZ",
-    description: "A mod which i will put my random ideas over time. Do not expect this mod to be balanced OR good, this is my first normal mod.",
+    description: "random ideas",
     version: 0.2,
-    minGameVersion: 125
+    minGameVersion: 126.2
 }
