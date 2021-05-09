@@ -1,6 +1,6 @@
 {
     name: "void",
-    displayName: "Void",
+    displayName: "[#8f00ff]Void[]",
     author: "QmelZ",
     description: "random ideas",
     version: 0.2,
