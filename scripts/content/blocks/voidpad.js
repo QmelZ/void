@@ -1,4 +1,4 @@
-let voidpad = extend(StorageBlock, "void-pad", {
+let voidpad = extend(StorageBlock, "voidpad", {
     localizedName: "Void Pad",
     description: "Can send/receive items to/from the core",
     buildVisibility: BuildVisibility.shown,
@@ -74,7 +74,7 @@ voidpad.buildType = () => extend(StorageBlock.StorageBuild, voidpad, {
         
         if(this.enabled){
             Draw.color(this.team.color)
-            Draw.alpha(this.enabled ? ((0.5 - Math.abs((Time.time / 100 % 1) - 0.5)) * 2) : 0.5);
+            Draw.alpha(this.power.status === 1 ? ((0.5 - Math.abs((Time.time / 100 % 1) - 0.5)) * 2) : 0.5);
             Draw.rect(
                 this.isSender ? Icon.upOpen.getRegion() : Icon.downOpen.getRegion(),
                 this.x, this.y
