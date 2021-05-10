@@ -1,13 +1,14 @@
 importPackage(Packages.arc.util.async);
 
 let ignored = [
-    "selenia", "voidpad", "aquashield"
+    "selenia", "aquashield"
 ];
 
 let scripts = [];
 Threads.daemon(() => {
     let dir = Vars.mods.getMod(modName).root.child("scripts");
     dir.child("content").walk(e => {
+        if(!e.absolutePath().endsWith(".js")) return;
         let tmp = e.absolutePath().split(modName);
         tmp[0] = "";
         tmp = tmp.join(modName).replace("/scripts", "");

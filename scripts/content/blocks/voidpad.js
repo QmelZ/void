@@ -8,7 +8,13 @@ let voidpad = extend(StorageBlock, "void-pad", {
     itemCapacity: 1,
     hasPower: true,
     consumesPower: true,
-    configrations: ObjectMap.of()
+    configurable: true,
+    configurations: ObjectMap.of(
+        java.lang.Boolean,
+        extend(Cons2, {
+            get: (b, s) => b.toggleSend(s)
+        })
+    )
 });
 voidpad.consumes.power(240 / 60);
 
@@ -16,9 +22,12 @@ voidpad.buildType = () => extend(StorageBlock.StorageBuild, voidpad, {
     
     // configuration
     isSender: true,
-    tapped(){
-        print(this.isSender);
-        this.isSender = !this.isSender;
+    shouldHideConfigure: () => true,
+    toggleSend(b){
+        this.isSender = b;
+    },
+    buildConfiguration(){
+        this.configure(!this.isSender);
     },
     
     // function
@@ -65,7 +74,7 @@ voidpad.buildType = () => extend(StorageBlock.StorageBuild, voidpad, {
         
         if(this.enabled){
             Draw.color(this.team.color)
-            Draw.alpha(((0.5 - Math.abs((Time.time / 100 % 1) - 0.5)) * 2));
+            Draw.alpha(this.enabled ? ((0.5 - Math.abs((Time.time / 100 % 1) - 0.5)) * 2) : 0.5);
             Draw.rect(
                 this.isSender ? Icon.upOpen.getRegion() : Icon.downOpen.getRegion(),
                 this.x, this.y
@@ -83,5 +92,6 @@ voidpad.buildType = () => extend(StorageBlock.StorageBuild, voidpad, {
             this.x - 2, this.y + 2
         );
     },
-    drawTeam(){}
+    drawTeam(){},
+    drawConfigure(){}
 });
