@@ -1,7 +1,7 @@
 importPackage(Packages.arc.util.async);
 
 let ignored = [
-    "selenia", "aquashield"
+    "selenia"
 ];
 
 let scripts = [];

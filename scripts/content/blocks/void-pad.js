@@ -1,10 +1,12 @@
-let voidpad = extend(StorageBlock, "voidpad", {
+let voidpad = extend(StorageBlock, "void-pad", {
     localizedName: "Void Pad",
     description: "Can send/receive items to/from the core",
     buildVisibility: BuildVisibility.shown,
+    category: Category.distribution,
     destructible: true,
     update: true,
     size: 2,
+    
     itemCapacity: 1,
     hasPower: true,
     consumesPower: true,
@@ -93,5 +95,15 @@ voidpad.buildType = () => extend(StorageBlock.StorageBuild, voidpad, {
         );
     },
     drawTeam(){},
-    drawConfigure(){}
+    drawConfigure(){},
+    
+    // read/write
+    write(writes){
+        this.super$write(writes);
+        writes.bool(this.isSender);
+    },
+    read(reads, revision){
+        this.super$read(reads, revision);
+        this.isSender = reads.bool();
+    }
 });
