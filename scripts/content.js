@@ -1,23 +1,38 @@
 importPackage(Packages.arc.util.async);
 
-let ignored = [
-    "selenia"
-];
+const ignored = (function(){
+    const ignored = ["selenia"];
+    
+    return new RegExp("(" + ignored.join("|") + ")\\.js$"); //  /(ignored1|ignored2|...)\.js$/
+})();
 
-let scripts = [];
-Threads.daemon(() => {
-    let dir = Vars.mods.getMod(modName).root.child("scripts");
-    dir.child("content").walk(e => {
-        if(!e.absolutePath().endsWith(".js")) return;
-        let tmp = e.absolutePath().split(modName);
-        tmp[0] = "";
-        tmp = tmp.join(modName).replace("/scripts", "");
-        let path = tmp.substring(0, tmp.length - 3);
-        scripts.push(path);
-    });
-}).join();
-scripts.forEach(e => {
-    let tmp = e.split("/");
-    if(ignored.includes(tmp[tmp.length - 1])) return;
-    require(e);
-});
+function getModules(){
+    const modules = [];
+    
+    function walk(){
+        const modRoot = Vars.mods.getMod(modName).root;
+        const scriptDir = modRoot.child("scripts");
+        
+        scriptDir.child("content").walk(e => {
+            let path = e.absolutePath();
+            if(!path.endsWith(".js")) return;
+            if(path.match(ignored)) return;
+            
+            path = path.replace(scriptDir.absolutePath(), "");
+            path = path.slice(0, -3);
+            path = modName + path;
+            
+            modules.push(path);
+        });
+    }
+    
+    if(Version.number > 6){
+        walk(); // if v7+ don't use threads (to make it faster or something idk)
+    }else{
+        Threads.daemon(walk).join();
+    }
+    
+    return modules;
+}
+
+module.exports = getModules();

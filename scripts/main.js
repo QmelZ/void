@@ -1,4 +1,5 @@
-require(modName + "/content");
+const modules = require(modName + "/content");
+modules.forEach(require);
 
 Events.on(ClientLoadEvent, () => {
     Vars.mods.getMod(modName).meta.displayName = "[#8f00ff]Void[]";
