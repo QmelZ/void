@@ -11,7 +11,7 @@ function getModules(){
         scriptDir.child("content").walk(e => {
             let path = e.absolutePath();
             if(e.extension().toLowerCase() !== "js") return;
-            if(ignored.has(e.nameWithoutExtension())) return;
+            if(ignored.includes(e.nameWithoutExtension())) return;
             
             path = path.replace(scriptDir.absolutePath(), "");
             path = path.slice(0, -3);
