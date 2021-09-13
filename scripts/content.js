@@ -1,22 +1,17 @@
 importPackage(Packages.arc.util.async);
 
-const ignored = (function(){
-    const ignored = ["selenia"];
-    
-    return new RegExp("(" + ignored.join("|") + ")\\.js$"); //  /(ignored1|ignored2|...)\.js$/
-})();
+const ignored = ["selenia"];
 
 function getModules(){
     const modules = [];
     
     function walk(){
-        const modRoot = Vars.mods.getMod(modName).root;
-        const scriptDir = modRoot.child("scripts");
+        const scriptDir = Vars.mods.getMod(modName).root.child("scripts");
         
         scriptDir.child("content").walk(e => {
             let path = e.absolutePath();
-            if(!path.endsWith(".js")) return;
-            if(path.match(ignored)) return;
+            if(e.extension().toLowerCase() !== "js") return;
+            if(ignored.has(e.nameWithoutExtension())) return;
             
             path = path.replace(scriptDir.absolutePath(), "");
             path = path.slice(0, -3);
